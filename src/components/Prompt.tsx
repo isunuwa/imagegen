@@ -9,41 +9,68 @@ const Prompt = () => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isImageGenerating, setIsImageGenerating] = useState(false);
 
+  const [provider, setProvider] = useState("dalle");
+  const [size, setSize] = useState("1024x1024");
+
+  const API_URL = import.meta.env.VITE_IMAGEGEN_API_URL;
+  const API_TOKEN = import.meta.env.VITE_IMAGEGEN_BEARER_TOKEN;
+
   const tempImageSrc =
     "https://images.unsplash.com/photo-1762716514229-739f6769e282?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdyYWRpZW50JTIwZGlnaXRhbHxlbnwxfHx8fDE3NjY3NTc5NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral4";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!prompt.trim()) {
+      setError("Please enter a valid prompt.");
+      return;
+    }
+
     setIsLoading(true);
     setIsImageGenerating(true);
     setError(null);
     setImageSrc(null);
 
-    // Validation
-    if (prompt.trim() === "") {
-      // show error
-      setError("Please enter a valid prompt.");
-      setIsLoading(false);
-      setIsImageGenerating(false);
+    try {
+      const response = await fetch(`${API_URL}/v1/jobs/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_TOKEN}`,
+        },
+        body: JSON.stringify({
+          tasks: [
+            {
+              prompt,
+              provider: provider || "gemini",
+              size: size || "1024x1024",
+            },
+          ],
+        }),
+      });
 
-      const textarea = document.querySelector("textarea");
-      if (textarea) {
-        textarea.focus();
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || "Image generation failed");
       }
-      return;
-    }
 
-    console.log("Form submitted with value:", prompt);
+      const data = await response.json();
 
-    // API call simulation
-    // Simulate image generation delay
-    setTimeout(() => {
+      const imageUrl =
+        data?.results?.[0]?.image_url || data?.tasks?.[0]?.result?.image_url;
+
+      if (!imageUrl) {
+        throw new Error("No image returned from API");
+      }
+
+      setImageSrc(imageUrl);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "Something went wrong");
+    } finally {
       setIsLoading(false);
       setIsImageGenerating(false);
-
-      // temp image load
-      setImageSrc(tempImageSrc);
-    }, 5000);
+    }
   };
 
   return (
@@ -81,7 +108,7 @@ const Prompt = () => {
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
                       placeholder="Type something..."
-                      className="w-full px-4 py-4 pr-12 border border-gray-300 rounded-[28px] focus:outline-none focus:ring-1 focus:ring-purple-600 focus:border-transparent bg-background text-gray-900 text-lg resize-none"
+                      className="w-full px-4 py-4 pr-12 border border-gray-300 rounded-[28px] focus:outline-none focus:ring-1 focus:ring-purple-600 focus:border-transparent bg-foreground/50 text-lg resize-none text:background"
                     />
                     <button
                       type="submit"
@@ -114,7 +141,7 @@ const Prompt = () => {
           <div className="flex justify-center pb-16">
             <div className="relative max-w-full md:max-w-[720px] h-auto shadow-lg rounded-[24px] overflow-hidden">
               <motion.img
-                src={tempImageSrc}
+                src={imageSrc}
                 alt="Generated"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -125,7 +152,7 @@ const Prompt = () => {
               {/* Hover actions */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 bg-black bg-opacity-50 transition-opacity rounded-lg">
                 <a
-                  href={tempImageSrc}
+                  href={imageSrc}
                   download="generated-image.jpg"
                   className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full flex items-center gap-2"
                 >
@@ -134,7 +161,7 @@ const Prompt = () => {
                 </a>
 
                 <a
-                  href={tempImageSrc}
+                  href={imageSrc}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-background hover:bg-gray-200 text-purple-600 px-4 py-2 border border-purple-600 rounded-full flex items-center gap-2 ml-4"
