@@ -1,6 +1,6 @@
 {
-  "name": "amroimagefrontend",
-  "homepage": "https://isunuwa.github.io/imagegen/",
+  "name": "imagegen",
+  "homepage": "https://isunuwa.github.io/imagegen",
   "private": true,
   "version": "0.0.0",
   "type": "module",
