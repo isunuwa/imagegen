@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, Eye, Download, ArrowRight } from "lucide-react";
+import { Eye, Download, ArrowRight } from "lucide-react";
 
 interface Image {
   image: string;
@@ -18,11 +18,6 @@ interface ImageCardProps {
 const ImageCard = ({ image }: ImageCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-
-  const handleDownload = () => {
-    // Implement download functionality here
-    alert("Download initiated!");
-  };
 
   const handleViewDetails = () => {
     // Implement view details functionality here

@@ -1,13 +1,6 @@
 import { useState } from "react";
 import { Copy, Key, Save } from "lucide-react";
 
-interface ApiKey {
-  id: string;
-  name: string;
-  key: string;
-  createdAt: string;
-}
-
 export function ApiKeys() {
   //
   const [apiKey, setApiKey] = useState("");

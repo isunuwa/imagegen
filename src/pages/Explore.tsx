@@ -1,7 +1,7 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ImageCard from "../components/ImageCard";
-import Filterbar from "../components/Filterbar";
+import Filterbar from "../components/FilterBar";
 
 const images = [
   {

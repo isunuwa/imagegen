@@ -3,10 +3,6 @@ import Footer from "../components/Footer";
 import { Mail } from "lucide-react";
 import { useState } from "react";
 
-const contactInformation = {
-  
-}
-
 const Contact = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");

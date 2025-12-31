@@ -9,14 +9,14 @@ const Prompt = () => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isImageGenerating, setIsImageGenerating] = useState(false);
 
-  const [provider, setProvider] = useState("dalle");
-  const [size, setSize] = useState("1024x1024");
+  const [provider] = useState("dalle");
+  const [size] = useState("1024x1024");
 
   const API_URL = import.meta.env.VITE_IMAGEGEN_API_URL;
   const API_TOKEN = import.meta.env.VITE_IMAGEGEN_BEARER_TOKEN;
 
-  const tempImageSrc =
-    "https://images.unsplash.com/photo-1762716514229-739f6769e282?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdyYWRpZW50JTIwZGlnaXRhbHxlbnwxfHx8fDE3NjY3NTc5NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral4";
+  // const tempImageSrc =
+  //   "https://images.unsplash.com/photo-1762716514229-739f6769e282?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdyYWRpZW50JTIwZGlnaXRhbHxlbnwxfHx8fDE3NjY3NTc5NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral4";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
