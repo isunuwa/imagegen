@@ -11,9 +11,51 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  const API_BASE_URL = import.meta.env.VITE_IMAGEGEN_API_URL;
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic here
+
+    // password validation
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: fullName,
+          email,
+          password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data?.message || "Registration failed");
+      }
+
+      // ✅ success
+      setSuccess(true);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const togglePasswordVisibility = (field: "password" | "confirmPassword") => {
@@ -159,15 +201,35 @@ const Register = () => {
               </div>
             </div>
 
+            {error && <div className="text-sm text-pink-400">{error}</div>}
+
             {/* Submit Button */}
             <button
               type="submit"
               className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-4 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+              disabled={submitting}
             >
               Create an Account
               <ArrowRight className="w-5 h-5" />
             </button>
           </form>
+
+          {success && (
+            <div className="text-center space-y-4 mt-4 border border-1 border-green-400 rounded-lg p-4">
+              <p className="text-gray-600">
+                We’ve sent a verification link to <strong>{email}</strong>.
+                <br />
+                Please verify your email to activate your account.
+              </p>
+
+              <Link
+                to="/login"
+                className="inline-block mt-4 text-purple-600 hover:text-purple-700"
+              >
+                Go to Login
+              </Link>
+            </div>
+          )}
 
           {/* Login Link */}
           <div className="mt-8 text-center">

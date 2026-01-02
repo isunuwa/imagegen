@@ -28,28 +28,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    fetch(`${API_URL}/api/auth/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error();
-        return res.json();
-      })
-      .then((data) => {
-        setIsAuthenticated(true);
-        setUser(data.user ?? (storedUser ? JSON.parse(storedUser) : null));
-      })
-      .catch(() => {
-        localStorage.removeItem("auth_token");
-        localStorage.removeItem("user");
-        setIsAuthenticated(false);
-        setUser(null);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    // temp
+    setLoading(false);
+    setIsAuthenticated(true);
+    // temp
+
+    // fetch(`${API_URL}/api/auth/me`, {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) throw new Error();
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     setIsAuthenticated(true);
+    //     setUser(data.user ?? (storedUser ? JSON.parse(storedUser) : null));
+    //   })
+    //   .catch(() => {
+    //     localStorage.removeItem("auth_token");
+    //     localStorage.removeItem("user");
+    //     setIsAuthenticated(false);
+    //     setUser(null);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   }, []);
 
   const login = (token: string, user?: any) => {
