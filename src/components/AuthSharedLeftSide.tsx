@@ -13,9 +13,9 @@ const AuthSharedLeftSide = () => {
             className="w-100 h-100 m-auto flex items-center justify-center"
           />
         </div>
-        <h1 className="text-white text-5xl mb-4">Welcome Back</h1>
+        <h1 className="text-white text-5xl mb-4 font-bold">ImageGen</h1>
         <p className="text-purple-100 text-lg">
-          <span className="text-bold">AMRO | </span> Image
+          A product of&nbsp;<span className="font-bold">AMRO</span>
         </p>
       </div>
     </div>

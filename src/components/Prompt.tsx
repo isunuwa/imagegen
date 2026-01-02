@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Sparkles, Atom, Download, ScanSearch } from "lucide-react";
+import LoginModal from "../modals/LoginModal";
 
 const Prompt = () => {
   const [prompt, setPrompt] = useState("");
@@ -9,11 +10,17 @@ const Prompt = () => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [isImageGenerating, setIsImageGenerating] = useState(false);
 
-  const [provider] = useState("dalle");
+  // API body payload
+  const [provider] = useState("gemini");
   const [size] = useState("1024x1024");
 
+  // API keys
   const API_URL = import.meta.env.VITE_IMAGEGEN_API_URL;
   const API_TOKEN = import.meta.env.VITE_IMAGEGEN_BEARER_TOKEN;
+
+  // Modal
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const token = localStorage.getItem("auth_token");
 
   // const tempImageSrc =
   //   "https://images.unsplash.com/photo-1762716514229-739f6769e282?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdyYWRpZW50JTIwZGlnaXRhbHxlbnwxfHx8fDE3NjY3NTc5NTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral4";
@@ -23,6 +30,11 @@ const Prompt = () => {
 
     if (!prompt.trim()) {
       setError("Please enter a valid prompt.");
+      return;
+    }
+
+    if (!token) {
+      setShowLoginModal(true);
       return;
     }
 
@@ -108,7 +120,7 @@ const Prompt = () => {
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
                       placeholder="Type something..."
-                      className="w-full px-4 py-4 pr-12 border border-gray-300 rounded-[28px] focus:outline-none focus:ring-1 focus:ring-purple-600 focus:border-transparent bg-foreground/50 text-lg resize-none text:background"
+                      className="w-full px-4 py-4 pr-12 border border-gray-300 rounded-[28px] focus:outline-none focus:ring-1 focus:ring-purple-600 focus:border-transparent bg-background text-lg resize-none text:foreground"
                     />
                     <button
                       type="submit"
@@ -174,6 +186,14 @@ const Prompt = () => {
           </div>
         )}
       </div>
+
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onLoginSuccess={() => {
+          setShowLoginModal(false);
+        }}
+      />
     </>
   );
 };

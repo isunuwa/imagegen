@@ -3,14 +3,47 @@ import { Mail, Lock, ArrowRight } from "lucide-react";
 import AuthSharedLeftSide from "../../components/AuthSharedLeftSide";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.png";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login } = useAuth();
+
+  const API_URL = import.meta.env.VITE_IMAGEGEN_API_URL;
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
+
+    try {
+      const response = await fetch(
+        `${API_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(text || "Login failed");
+      }
+
+      const data = await response.json();
+
+      login(data.token, data.user);
+
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    }
   };
 
   return (
@@ -80,6 +113,8 @@ const Login = () => {
                 />
               </div>
             </div>
+
+            {error && <div className="text-sm text-pink-400">{error}</div>}
 
             {/* Submit Button */}
             <button

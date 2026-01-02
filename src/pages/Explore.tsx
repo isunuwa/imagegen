@@ -107,7 +107,7 @@ const Explore = () => {
     <>
       <Header />
 
-      <div className="pt-16 bg-white border-b border-gray-200">
+      <div className="bg-background text-foreground pt-10 relative pt-16">
         <div className="container mx-auto  py-4">
           {/* Filter Bar */}
           <Filterbar />

@@ -30,12 +30,12 @@ const ImageCard = ({ image }: ImageCardProps) => {
 
   return (
     <div
-      className="bg-white"
+      className=""
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Container */}
-      <div className=" aspect-[4/3] bg-white overflow-hidden group">
+      <div className="aspect-[4/3] overflow-hidden group">
         <div className="rounded-[24px] relative overflow-hidden w-full h-full">
           <img
             src={image.image}
@@ -62,14 +62,14 @@ const ImageCard = ({ image }: ImageCardProps) => {
         <div className="flex items-center justify-between">
           {/* Author Info */}
           <div className="flex items-center gap-3">
-            <span className="text-gray-700">{image.author}</span>
+            <span className="text-foreground">{image.author}</span>
           </div>
 
           {/* Stats */}
           <div className="flex items-center gap-4">
             <button
               onClick={handleLike}
-              className="flex items-center gap-1 text-gray-600 hover:text-red-500 transition-colors"
+              className="flex items-center gap-1 text-secondary-foreground hover:text-red-500 transition-colors"
             >
               <Download
                 className={`w-4 h-4 ${
@@ -78,7 +78,7 @@ const ImageCard = ({ image }: ImageCardProps) => {
               />
               <span className="text-sm">{image.likes + (isLiked ? 1 : 0)}</span>
             </button>
-            <div className="flex items-center gap-1 text-gray-600">
+            <div className="flex items-center gap-1 text-secondary-foreground">
               <Eye className="w-4 h-4" />
               <span className="text-sm">{image.views}</span>
             </div>

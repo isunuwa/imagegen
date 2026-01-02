@@ -26,9 +26,9 @@ const Filterbar = () => {
       </div>
 
       {/* Right Side - Filters Button */}
-      <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-        <SlidersHorizontal className="w-4 h-4 text-gray-600" />
-        <span className="text-gray-700 hidden sm:inline">Filters</span>
+      <button className="dark:bg-slate-800 dark:text-foreground dark:border-gray-800 flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+        <SlidersHorizontal className="w-4 h-4" />
+        <span className="hidden sm:inline">Filters</span>
       </button>
     </div>
   );
