@@ -6,8 +6,8 @@ const AuthGate = ({ children }: { children: React.ReactNode }) => {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gray-50">
-        <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+      <div className="h-screen flex items-center justify-center bg-background text:foreground">
+        <Loader2 className="w-8 h-8 text-purple-600 animate-spin" />
       </div>
     );
   }

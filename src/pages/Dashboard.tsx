@@ -8,7 +8,7 @@ const Dashboard = () => {
       <Header />
 
       <div className="bg-background pt-10 relative">
-        <div className=" min-h-screen container mx-auto">
+        <div className="min-h-screen container mx-auto py-4">
           <StatsCards />
         </div>
       </div>

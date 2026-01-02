@@ -41,23 +41,23 @@ const StatsCards = () => {
   > = {
     blue: {
       text: "text-blue-500",
-      border: "hover:border-blue-500/50",
-      bg: "from-blue-500/5",
+      border: "dark:border-blue-500/50 hover:border-blue-500/50",
+      bg: "from-blue-500/10",
     },
     green: {
       text: "text-green-500",
-      border: "hover:border-green-500/50",
-      bg: "from-green-500/5",
+      border: "dark:border-green-500/50 hover:border-green-500/50",
+      bg: "from-green-500/10",
     },
     purple: {
       text: "text-purple-500",
-      border: "hover:border-purple-500/50",
-      bg: "from-purple-500/5",
+      border: "dark:border-purple-500/50 hover:border-purple-500/50",
+      bg: "from-purple-500/10",
     },
     orange: {
       text: "text-orange-500",
-      border: "hover:border-orange-500/50",
-      bg: "from-orange-500/5",
+      border: "dark:border-orange-500/50 hover:border-orange-500/50",
+      bg: "from-orange-500/10",
     },
   };
 
@@ -68,15 +68,15 @@ const StatsCards = () => {
         return (
           <div
             key={index}
-            className={`bg-white rounded-lg border border-gray-200 ${colors.border} transition-all group overflow-hidden`}
+            className={`bg-background dark:bg-slate-900 rounded-lg border border-gray-200 ${colors.border} transition-all group relative overflow-hidden`}
           >
             <div
-              className={`absolute inset-0 bg-gradient-to-br ${colors.bg} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}
+              className={`absolute inset-0 bg-gradient-to-bl ${colors.bg} to-transparent opacity-0 group-hover:opacity-100 transition-opacity`}
             ></div>
             <div className="relative p-6">
               <div className={`${colors.text} mb-3`}>{stat.icon}</div>
               <div className={`text-3xl mb-1 ${colors.text}`}>{stat.value}</div>
-              <div className="text-sm text-gray-600">{stat.label}</div>
+              <div className="text-sm text-gray-600 dark:text-foreground">{stat.label}</div>
             </div>
           </div>
         );

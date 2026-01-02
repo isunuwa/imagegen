@@ -25,7 +25,16 @@ const Header = () => {
               >
                 <img src={Logo} alt="Logo" className="h-10" />
               </NavLink>
-
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "text-primary" : "text-foreground"
+                  } border-transparent hover:text-primary inline-flex items-center px-1 pt-1 text-sm font-medium`
+                }
+              >
+                Home
+              </NavLink>
               {isAuthenticated && (
                 <>
                   <NavLink
@@ -65,16 +74,6 @@ const Header = () => {
               {/*  */}
               {!isAuthenticated && (
                 <>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `${
-                        isActive ? "text-primary" : "text-foreground"
-                      } border-transparent hover:text-primary inline-flex items-center px-1 pt-1 text-sm font-medium`
-                    }
-                  >
-                    Home
-                  </NavLink>
                   {/* <NavLink
                   to="/features"
                   className={({ isActive }) =>
