@@ -1,19 +1,6 @@
 import { useState } from "react";
 import { Eye, Download, ArrowRight } from "lucide-react";
-
-interface Image {
-  image: string;
-  title: string;
-  description: string;
-  likes: number;
-  views: number;
-  downloads: number;
-  author: string;
-}
-
-interface ImageCardProps {
-  image: Image;
-}
+import type { ImageCardProps } from "../types";
 
 const ImageCard = ({ image }: ImageCardProps) => {
   const [isHovered, setIsHovered] = useState(false);

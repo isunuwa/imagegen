@@ -57,8 +57,7 @@ const Header = () => {
                   >
                     Explore
                   </NavLink>
-
-                  <NavLink
+                  {/* <NavLink
                     to="/favorites"
                     className={({ isActive }) =>
                       `${
@@ -67,6 +66,16 @@ const Header = () => {
                     }
                   >
                     Favorites
+                  </NavLink> */}
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "text-primary" : "text-foreground"
+                      } border-transparent hover:text-primary inline-flex items-center px-1 pt-1 text-sm font-medium`
+                    }
+                  >
+                    Profile
                   </NavLink>
                 </>
               )}

@@ -4,13 +4,17 @@ import type { StatCard, StatsCardsProps } from "../types";
 const StatsCards = ({ data, loading, error }: StatsCardsProps) => {
   if (loading) {
     return (
-      <div className="text-center py-10 text-gray-500">Loading stats...</div>
+      <div className="flex items-center gap-4 mb-4 px-4 py-2 bg-purple-50 border border-purple-200 rounded-lg text-purple-800 text-sm">
+        <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+        Loading Stats
+      </div>
     );
   }
 
   if (error) {
     return (
-      <div className="mb-4 px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm">
+      <div className="flex items-center gap-4  mb-4 px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-700 text-sm">
+        <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
         Unable to load live data: {error}
       </div>
     );

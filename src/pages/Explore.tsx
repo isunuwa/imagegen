@@ -64,42 +64,6 @@ const images = [
     description: "Comprehensive financial analytics dashboard",
     downloads: 178,
   },
-  {
-    id: 6,
-    title: "Tech-Enabled Reporting Projects",
-    author: "Lorem Ipsum",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    likes: 15,
-    views: 4500,
-    category: "Branding",
-    description: "Modern tech reporting and analytics platform",
-    downloads: 267,
-  },
-  {
-    id: 7,
-    title: "Digital Experience Platform",
-    author: "Lorem Ipsum",
-    image:
-      "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop",
-    likes: 12,
-    views: 3800,
-    category: "Web Design",
-    description: "Integrated digital experience platform design",
-    downloads: 201,
-  },
-  {
-    id: 8,
-    title: "Blockchain Platform",
-    author: "Lorem Ipsum",
-    image:
-      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop",
-    likes: 24,
-    views: 5600,
-    category: "Web Design",
-    description: "Enterprise blockchain platform interface",
-    downloads: 334,
-  },
 ];
 
 const Explore = () => {

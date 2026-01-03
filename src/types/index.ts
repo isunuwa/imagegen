@@ -65,3 +65,45 @@ export interface StatsCardsProps {
   loading?: boolean;
   error?: string | null;
 }
+
+export interface ApiKey {
+  id: string;
+  name: string;
+  key: string;
+  created_at: string;
+  last_used: string;
+  requests_count: number;
+}
+
+export interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+  onLoginSuccess: (token: string) => void;
+}
+
+export interface Image {
+  image: string;
+  title: string;
+  description: string;
+  likes: number;
+  views: number;
+  downloads: number;
+  author: string;
+}
+
+export interface ImageCardProps {
+  image: Image;
+}
+
+export interface ProfileSidebarProps {
+  activeSection: string;
+  onSectionChange: (section: string) => void;
+}
+
+export interface AuthContextType {
+  isAuthenticated: boolean;
+  user: any | null;
+  loading: boolean;
+  login: (token: string, user?: any) => void;
+  logout: () => void;
+}

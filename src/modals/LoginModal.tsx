@@ -1,11 +1,7 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import type { Props } from "../types";
 
-interface Props {
-  isOpen: boolean;
-  onClose: () => void;
-  onLoginSuccess: (token: string) => void;
-}
 
 function LoginModal({ isOpen, onClose }: Props) {
   if (!isOpen) return null;

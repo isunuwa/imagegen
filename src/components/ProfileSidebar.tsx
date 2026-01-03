@@ -1,9 +1,5 @@
 import { User, Key } from "lucide-react";
-
-interface ProfileSidebarProps {
-  activeSection: string;
-  onSectionChange: (section: string) => void;
-}
+import type { ProfileSidebarProps } from "../types";
 
 export function ProfileSidebar({
   activeSection,
@@ -15,7 +11,7 @@ export function ProfileSidebar({
   ];
 
   return (
-    <div className="w-64 bg-background border-r border-border h-full py-6">
+    <div className="w-64 bg-background border-r border-border dark:border-slate-700 h-full py-6">
       <h2 className="mb-2 text-foreground font-bold">Settings</h2>
 
       <div className="space-y-2">
