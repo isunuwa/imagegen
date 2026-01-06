@@ -33,7 +33,7 @@ const Header = () => {
                   } border-transparent hover:text-primary inline-flex items-center px-1 pt-1 text-sm font-medium`
                 }
               >
-                Home
+                {!isAuthenticated ? "Home" : "Generate"}
               </NavLink>
               {isAuthenticated && (
                 <>
@@ -45,9 +45,9 @@ const Header = () => {
                       } border-transparent hover:text-primary inline-flex items-center px-1 pt-1 text-sm font-medium`
                     }
                   >
-                    Your Work
+                    Dashboard
                   </NavLink>
-                  <NavLink
+                  {/* <NavLink
                     to="/explore"
                     className={({ isActive }) =>
                       `${
@@ -56,7 +56,7 @@ const Header = () => {
                     }
                   >
                     Explore
-                  </NavLink>
+                  </NavLink> */}
                   {/* <NavLink
                     to="/favorites"
                     className={({ isActive }) =>

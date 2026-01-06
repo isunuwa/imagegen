@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import StatsCards from "../components/StatsCard";
+import UsageAnalytics from "../components/UsageAnalytics";
 
 import type { DashboardStats } from "../types";
 
@@ -62,6 +63,8 @@ const Dashboard = () => {
           <StatsCards data={statsData} loading={loading} error={error} />
         </div>
       </div>
+
+      <UsageAnalytics />
 
       <Footer />
     </>

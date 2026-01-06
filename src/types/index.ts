@@ -107,3 +107,29 @@ export interface AuthContextType {
   login: (token: string, user?: any) => void;
   logout: () => void;
 }
+
+export type Profile = {
+  full_name: string;
+  email: string;
+  password: string;
+};
+
+export interface UsageDay {
+  date: string;
+  calls: number;
+  credits: number;
+}
+
+export interface ProviderUsage {
+  provider: string;
+  calls: number;
+  credits: number;
+}
+
+export interface UsageAnalyticsResponse {
+  period: string;
+  total_calls: number;
+  total_credits: number;
+  daily_usage: UsageDay[];
+  provider_usage: ProviderUsage[];
+}
